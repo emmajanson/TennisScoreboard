@@ -86,43 +86,54 @@ const TennisScoreboard = () => {
 
   return (
     <div className="wrapper">
-      <video>
+      <video className="backgroundVideo">
         <source
-          className="backgroundVideo"
           src={backgroundVideo}
+          type="video/mp4"
           controls
           autoPlay
+          muted
           loop
-        ></source>
+        />
       </video>
-      
+
       <div className="scoreboardWrapper">
-        <h2>{determineScore()}</h2>
-        {determineGameWinner() && (
-          <h3>{determineGameWinner()} won the game!</h3>
-        )}
-        {determineScore() === 'Deuce' && <h3>It's deuce!</h3>}
-        {determineScore().includes('Advantage') && <h3>{determineScore()}</h3>}
-        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-          <div>
-            <h3>{player1Name}</h3>
-            <button onClick={() => handleScore(1)}>Add score</button>
-            <p>Score: {player1Score}</p>
-            <p>Sets: {player1Sets}</p>
+        <div className="scoreContainer">
+          <p className="currentSet">Current Set: {currentSet}</p>
+          <h2 className="scoreTracker">{determineScore()}</h2>
+          {determineGameWinner() && (
+            <h3>{determineGameWinner()} won the game!</h3>
+          )}
+          {determineScore() === 'Deuce' && <h3>It's deuce!</h3>}
+          {determineScore().includes('Advantage') && (
+            <h3>{determineScore()}</h3>
+          )}
+        </div>
+
+        <div className="cardsContainer">
+          <div className="cardWrapper">
+            <h3 className="name">{player1Name}</h3>
+            <p className="score">Score: {player1Score}</p>
+            <p className="sets">Sets: {player1Sets}</p>
+            <button className="scoreBtn" onClick={() => handleScore(1)}>
+              Add score
+            </button>
           </div>
-          <div>
-            <h3>{player2Name}</h3>
-            <button onClick={() => handleScore(2)}>Add score</button>
-            <p>Score: {player2Score}</p>
-            <p>Sets: {player2Sets}</p>
+
+          <div className="cardWrapper">
+            <h3 className="name">{player2Name}</h3>
+            <p className="score">Score: {player2Score}</p>
+            <p className="sets">Sets: {player2Sets}</p>
+            <button className="scoreBtn" onClick={() => handleScore(2)}>
+              Add score
+            </button>
           </div>
         </div>
-        <button onClick={() => resetScoresAndSets()}>Reset</button>
-        <div>
-          <h3>Sets</h3>
-          <p>Current Set: {currentSet}</p>
-          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-          </div>
+
+        <div className="resetBtnWrapper">
+          <button className="resetBtn" onClick={() => resetScoresAndSets()}>
+            Reset
+          </button>
         </div>
       </div>
     </div>

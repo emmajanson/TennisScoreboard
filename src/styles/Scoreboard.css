@@ -26,12 +26,26 @@ body {
 	right: 0;
 }
 
+.scoreContainer {
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.currentSet {
+	font-size: 1.5rem;
+}
+
+.scoreTracker {
+	font-size: 3rem;
+}
+
 .cardsContainer {
 	width: 50%;
 	height: 300px;
 	display: flex;
 	justify-content: center;
 	justify-content: space-between;
+	margin-top: 5rem;
 }
 
 .cardWrapper {
@@ -45,30 +59,49 @@ body {
 }
 
 .name {
-	font-size: 1rem;
+	font-size: 2rem;
 	text-align: center;
 }
 
-.scoreBox {
+/* .scoreBox {
 	display: flex;
 	width: 100%;
 	height: 30%;
 	justify-content: center;
 	align-items: center;
-}
+} */
 
-.points {
+.score {
 	color: white;
-	font-size: 5rem;
-	margin-top: 2rem;
-}
-
-.games {
+	font-size: 1.5rem;
 	margin-top: 2rem;
 }
 
 .sets {
+	font-size: 1.5rem;
 	margin-top: 2rem;
+}
+
+.scoreBtn {
+	border: 2px solid white;
+	border-radius: 3px;
+	padding: 1rem 2rem 1rem 2rem;
+	background-color: white;
+	opacity: 90%;
+	color: #874B4B;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-weight: 600;
+	cursor: pointer;
+	margin-top: 2rem;
+}
+
+.scoreBtn:hover {
+	color: white;
+	border: 2px solid white;
+	background-color: transparent;
+	opacity: 70%;
+	transition: ease-in-out 0.5s;
 }
 
 .resetBtnWrapper {
