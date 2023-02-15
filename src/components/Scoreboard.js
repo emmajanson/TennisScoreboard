@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
-import '../styles/Scoreboard.css';
-import backgroundVideo from '../media/tenniscourt.mp4';
+//Imports the necessary dependencies and resources
+import React, { useState } from 'react'; //Imports the react library and the useState hook from react module
+import '../styles/Scoreboard.css'; //Imports style from css file
+import backgroundVideo from '../media/tenniscourt.mp4'; //Imports videoBackground file from media directory 
 
-const TennisScoreboard = () => {
-  const [player1Score, setPlayer1Score] = useState(0);
-  const [player2Score, setPlayer2Score] = useState(0);
-  const [player1Name, setPlayer1Name] = useState('Player 1');
-  const [player2Name, setPlayer2Name] = useState('Player 2');
-  const [player1Sets, setPlayer1Sets] = useState(0);
-  const [player2Sets, setPlayer2Sets] = useState(0);
-  const [currentSet, setCurrentSet] = useState(1);
+//Declares a functional component for the Scoreboard
+const TennisScoreboard = () => { //Defines functional component
+  const player1Name = 'Player 1'; //Declares Player 1 - used to set the initial name of the first player
+  const player2Name = 'Player 2'; //Declares Player 2 - used to set the initial name of the second player
+  const [player1Score, setPlayer1Score] = useState(0); //Initializes a state variable to 0 (so points start counting from 0) & creates a function to update the value of player1Score
+  const [player2Score, setPlayer2Score] = useState(0); //Initializes a state variable to 0 (so points start counting from 0) & creates a function to update the value of player2Score
+  const [player1Sets, setPlayer1Sets] = useState(0); //Initializes a state variable to 0 (so that winning sets start counting from 0) & creates a function to update the value of player1Sets
+  const [player2Sets, setPlayer2Sets] = useState(0); //Initializes a state variable to 0 (so that winning sets start counting from 0) & creates a function to update the value of player2Sets
+  const [currentSet, setCurrentSet] = useState(1); //Initializes a state variable to 1 (so that current set start counting from 1) & creates a function to update the value of currentSet
 
-  const handleScore = (player) => {
-    if (player === 1) {
-      setPlayer1Score(player1Score + 1);
-    } else if (player === 2) {
-      setPlayer2Score(player2Score + 1);
+  const handleScore = (player) => { //Defines a function that takes a player argument
+    if (player === 1) { //Checks if player is equal to 1. (With other words: Checks if it's the first player)
+      setPlayer1Score(player1Score + 1); //Updates the value of player1Score by adding 1 using the setPlayer1Score function. (With other words: Updates Score with 1 for player 1)
+    } else if (player === 2) { //Checks if player is equal to 2. (With other words: Checks if it's the second player)
+      setPlayer2Score(player2Score + 1);  //Updates the value of player2Score by adding 1 using the setPlayer2Score function. (With other words: Updates Score with 1 for player 2)
     }
   };
 
