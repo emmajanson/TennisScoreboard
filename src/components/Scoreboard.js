@@ -21,69 +21,69 @@ const TennisScoreboard = () => { //Defines functional component
     }
   };
 
-  const resetScoresAndSets = () => {
-    setPlayer1Score(0);
-    setPlayer2Score(0);
-    setPlayer1Sets(0);
-    setPlayer2Sets(0);
-    setCurrentSet(1);
+  const resetScoresAndSets = () => { //Defines a function that will reset scores and sets
+    setPlayer1Score(0); //Sets value of player1Score to 0 using the setPlayer1Score function (with other words: Resets scores of player 1)
+    setPlayer2Score(0); //Sets value of player2Score to 0 using the setPlayer2Score function (with other words: Resets scores of player 2)
+    setPlayer1Sets(0); //Sets value of player1Sets to 0 using the setPlayer1Sets function (with other words: Resets sets of player 1)
+    setPlayer2Sets(0); //Sets value of player2Sets to 0 using the setPlayer2Sets function (with other words: Resets sets of player 2)
+    setCurrentSet(1); //Sets value of currentSet to 1 using the setCurrentSet function (with other words: Resets current set to 1/first set)
   };
 
-  const formatScore = (score) => {
-    if (score === 0) {
-      return 'Love';
-    } else if (score === 1) {
-      return '15';
-    } else if (score === 2) {
-      return '30';
-    } else if (score === 3) {
-      return '40';
-    } else if (score >= 4) {
-      return 'A';
+  const formatScore = (score) => { //Declares a function that takes a score argument. The function will be used to convert the numerical scores to their corresponding string representations
+    if (score === 0) { //Checks if the score is equal to 0
+      return 'Love'; //If it is, the function returns the string (Love)
+    } else if (score === 1) { //If the score is not 0, this else if statement checks if the score is equal to 1
+      return '15'; //If it is, the function returns the string (15)
+    } else if (score === 2) { //If the score is not 0 or 1, this else if statement checks if the score is equal to 2
+      return '30'; //If it is, the function returns the string (30)
+    } else if (score === 3) { //If the score is not 0, 1 or 2, this else if statement checks if the score is equal to 3
+      return '40'; //If it is, the function returns the string (40)
+    } else if (score >= 4) { //If the score is not 0, 1, 2 or 3, this else if statement checks if the score is greater than or equal to 4
+      return 'A'; //If it is, the function returns the string (A, aka Advantage)
     }
   };
 
-  const determineGameWinner = () => {
-    if (player1Score >= 4 && player1Score - player2Score >= 2) {
-      return player1Name;
-    } else if (player2Score >= 4 && player2Score - player1Score >= 2) {
-      return player2Name;
+  const determineGameWinner = () => { //Declares a function with no arguments. The function will be used to check whether a game has been won by either player
+    if (player1Score >= 4 && player1Score - player2Score >= 2) { //Checks whether player1 has a score of at least 4 points and is at least 2 points ahead of player2 
+      return player1Name; //If it is true, player1 is the winner of the game and the function returns player1Name (=Player 1)
+    } else if (player2Score >= 4 && player2Score - player1Score >= 2) { //Checks wheter player2 has a score of at least 4 points and is at least 2 points ahead of player1
+      return player2Name; //If it is true, player2 is the winner of the game and the function returns player2Name (=Player 2)
     }
   };
 
-  const determineSetWinner = () => {
-    if (player1Score >= 6 && player1Score - player2Score >= 2) {
-      setPlayer1Sets(player1Sets + 1);
-      setCurrentSet(currentSet + 1);
-      setPlayer1Score(0);
-      setPlayer2Score(0);
-    } else if (player2Score >= 6 && player2Score - player1Score >= 2) {
-      setPlayer2Sets(player2Sets + 1);
-      setCurrentSet(currentSet + 1);
-      setPlayer1Score(0);
-      setPlayer2Score(0);
+  const determineSetWinner = () => { //Declares a function with no arguments. The function will be used to check whether a set has been won by either player
+    if (player1Score >= 6 && player1Score - player2Score >= 2) { //Checks wether player1 has a score of at least 6 points and is at least 2 points ahead of player2. If it is true, player1 is the winner of the set
+      setPlayer1Sets(player1Sets + 1); //This increments the number of sets won by player1 by 1
+      setCurrentSet(currentSet + 1); //This increments the current set by 1
+      setPlayer1Score(0); //This resets the scores of player1
+      setPlayer2Score(0); //This resets the scores of player2
+    } else if (player2Score >= 6 && player2Score - player1Score >= 2) { //Checks wether player2 has a score of at least 6 points and is at least 2 points ahead of player1. If it is true, player2 is the winner of the set
+      setPlayer2Sets(player2Sets + 1); //This increments the number of sets won by player2 by 1
+      setCurrentSet(currentSet + 1); //This increments the current set by 1
+      setPlayer1Score(0); //This resets the scores of player1
+      setPlayer2Score(0); //This resets the scores of player2
     }
   };
 
-  const determineScore = () => {
-    const winner = determineGameWinner();
-    if (winner) {
-      determineSetWinner();
-      return `Game, ${winner}`;
+  const determineScore = () => { //Declares a arrowfunction with no arguments
+    const winner = determineGameWinner(); //Calls the determineGameWinner function above which checks if either player has won the game. If a winner is found, their name is returned. Otherwise, the function returns undefined. The result of this call is stored in the winner variable
+    if (winner) { //If winner is true (with other words: a player has won the game)...
+      determineSetWinner(); //...the determineSetWinner function is calledwhich increments the number of sets won by the appropriate player, resets the game score, and advances to the next set
+      return `Game, ${winner}`; //Then returns the string (with the word Game and the name of the player)
     }
-    if (player1Score === player2Score) {
-      if (player1Score >= 3) {
-        return 'Deuce';
+    if (player1Score === player2Score) { //This checks if the scores are tied
+      if (player1Score >= 3) { //This checks if the scores are at least 3-3
+        return 'Deuce'; //If it is, the function returns this string (Deuce)
       }
-      return `${formatScore(player1Score)}-All`;
-    } else if (player1Score >= 4 || player2Score >= 4) {
-      const leader = player1Score > player2Score ? player1Name : player2Name;
-      const scoreDiff = Math.abs(player1Score - player2Score);
-      if (scoreDiff === 1) {
-        return `Advantage, ${leader}`;
+      return `${formatScore(player1Score)}-All`; //Otherwise, the function returns this string (formatScore and the word All)
+    } else if (player1Score >= 4 || player2Score >= 4) { //If neither of the conditions above is true (if the scores are not tied), this else if function checks if either player has a score of at least 4 points
+      const leader = player1Score > player2Score ? player1Name : player2Name; //If so, it determines which player has the higher score (is the leader)
+      const scoreDiff = Math.abs(player1Score - player2Score); //This calculates the difference between the players scores, regardless of which one is higher.
+      if (scoreDiff === 1) { //If the score difference is 1 point, then the player who is in the lead has Advantage...
+        return `Advantage, ${leader}`; //...and the function returns this string (the word Advantage and the name of the leader)
       }
     }
-    return `${formatScore(player1Score)}-${formatScore(player2Score)}`;
+    return `${formatScore(player1Score)}-${formatScore(player2Score)}`; //If neither of the conditions above is true, the function returns this string (With other words: The string is calling the function formatScore and returns current score for each player)
   };
 
   return (
